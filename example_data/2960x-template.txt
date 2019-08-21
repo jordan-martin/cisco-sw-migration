@@ -1,0 +1,131 @@
+no service tcp-small-servers
+no service udp-small-servers  
+no service pad
+no ip finger
+no service finger
+no ip http server
+no ip http secure-server
+!
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec localtime show-timezone                    
+service timestamps log datetime msec localtime show-timezone     
+service password-encryption
+service sequence-numbers  
+!
+<<< Hostname >>>
+!
+boot-start-marker
+boot-end-marker
+!
+clock timezone EST -5 0
+clock summer-time EDT recurring
+!
+enable secret super-secret-password
+!
+username jkm privilege 15 secret super-secret-password
+!
+no aaa new-model
+!
+<<< Provision Switches >>>>
+!
+!
+ip domain-name domain.fake
+no ip domain-lookup
+ip tcp synwait-time 5
+vtp domain vtp-domain
+vtp password vtp-password
+vtp version 2
+vtp mode transparent
+!
+spanning-tree mode mst
+spanning-tree extend system-id
+spanning-tree mst configuration
+ name MST
+ revision 1
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+<<< Required VLANS >>>
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+!
+<<< Interface Configurations >>>
+!
+<<< Management Interface >>>
+!
+ip default-gateway 172.20.250.1
+no ip http server
+no ip http secure-server
+!
+ip ssh version 2
+!
+logging buffered 256000 debugging
+logging console warning
+logging monitor critical
+logging trap warning
+logging source-interface vlan1
+logging 172.20.2.70
+!
+snmp-server community super-secret-ro-community RO
+snmp-server queue-length 1
+snmp-server chassis-id <<< Hostname >>>
+snmp-server enable traps
+snmp-server host 172.20.2.70 super-secret-community 
+!
+!
+archive 
+  path flash:BackupConfig
+  maximum 7
+  write-memory
+!
+!
+login block-for 120 attempts 5 within 60
+login on-failure log
+login on-success log
+aaa new-model
+ip radius source-interface vlan1
+radius server RADIUS-1
+ address ipv4 172.20.90.221 auth-port 1645 acct-port 1646
+ key 7 .........
+radius server RADIUS-2
+ address ipv4 172.20.90.222 auth-port 1645 acct-port 1646
+ key 7 .......
+aaa group server radius RADIUS-SERVERS
+ server name RADIUS-1
+ server name RADIUS-2
+aaa authentication login default group RADIUS-SERVERS local-case
+aaa authentication login console local-case
+aaa authorization exec aaa-auth group RADIUS-SERVERS local none 
+aaa session-id common
+!
+!
+!
+line con 0
+ privilege level 15
+ login authentication console
+ stopbits 1
+line aux 0
+ login authentication console
+ stopbits 1
+line vty 0 4
+ exec-timeout 30 0
+ privilege level 15
+ transport input ssh
+line vty 5 15
+ exec-timeout 30 0
+ privilege level 15
+ transport input ssh
+!
+ntp source Loopback0
+ntp server 172.20.3.2 prefer
+ntp server 172.20.3.3
+!
