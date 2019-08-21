@@ -1,0 +1,229 @@
+Building configuration...
+
+Current configuration : 4943 bytes
+!
+! Last configuration change at 11:35:40 EST Thu May 19 2016
+! NVRAM config last updated at 15:59:57 EST Mon Dec 7 2015
+!
+version 12.2
+no service pad
+service timestamps debug uptime
+service timestamps log uptime
+service password-encryption
+!
+hostname switch-1
+!
+enable secret super-secret-password
+!
+no aaa new-model
+clock timezone EST -5
+clock summer-time EST recurring 2 Sun Mar 2:00 1 Sun Nov 2:00
+vtp mode transparent
+ip subnet-zero
+!
+!
+!
+!
+no file verify auto
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+vlan  2
+!
+vlan  3
+!
+vlan 204,224 
+!
+vlan  2175
+!
+interface FastEthernet0/1
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 2175
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 204
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 2175
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1,204,224
+ switchport mode trunk
+!
+interface FastEthernet0/24
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 204,2175
+ switchport mode trunk
+!
+interface GigabitEthernet0/1
+ description This is a description...
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1,204,224,2175
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan204
+ ip address 172.20.204.34 255.255.255.0
+!
+ip default-gateway 172.20.204.1
+ip classless
+no ip http server
+!
+snmp-server community super-secret-ro-community RO
+snmp-server queue-length 1
+snmp-server chassis-id switch-1
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps tty
+snmp-server enable traps cluster
+snmp-server enable traps fru-ctrl
+snmp-server enable traps entity
+snmp-server enable traps cpu threshold
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps flash insertion removal
+snmp-server enable traps port-security
+snmp-server enable traps envmon
+snmp-server enable traps MAC-Notification
+snmp-server enable traps copy-config
+snmp-server enable traps config
+snmp-server enable traps hsrp
+snmp-server enable traps rtr
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps syslog
+snmp-server enable traps vlan-membership
+snmp-server host 172.20.2.70 super-secret-community 
+!
+control-plane
+!
+!
+line con 0
+ password super-secret-password
+ login
+line vty 0 4
+ password super-secret-password
+ login
+line vty 5 15
+ password super-secret-password
+ no login
+!
+ntp clock-period 36029603
+ntp server 209.244.0.4
+ntp server 66.228.42.59
+ntp server 66.228.35.252
+ntp server 142.54.181.202
+!
+end
+
+
+

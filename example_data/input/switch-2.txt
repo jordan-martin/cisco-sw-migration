@@ -1,0 +1,593 @@
+
+Building configuration...
+
+Current configuration : 14264 bytes
+!
+! No configuration change since last restart
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname switch-2
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret super-secret-password
+!
+no aaa new-model
+clock timezone EST -5 0
+clock summer-time EST recurring
+switch 1 provision ws-c2960x-48lps-l
+!
+!
+ip domain-name domain.fake
+vtp domain vtp-domain
+vtp mode transparent
+!
+mls qos map cos-dscp 0 8 16 24 32 46 48 56
+mls qos srr-queue output cos-map queue 1 threshold 3 4 5
+mls qos srr-queue output cos-map queue 2 threshold 1 2
+mls qos srr-queue output cos-map queue 2 threshold 2 3
+mls qos srr-queue output cos-map queue 2 threshold 3 6 7
+mls qos srr-queue output cos-map queue 3 threshold 3 0
+mls qos srr-queue output cos-map queue 4 threshold 3 1
+mls qos srr-queue output dscp-map queue 1 threshold 3 32 33 40 41 42 43 44 45
+mls qos srr-queue output dscp-map queue 1 threshold 3 46 47
+mls qos srr-queue output dscp-map queue 2 threshold 1 16 17 18 19 20 21 22 23
+mls qos srr-queue output dscp-map queue 2 threshold 1 26 27 28 29 30 31 34 35
+mls qos srr-queue output dscp-map queue 2 threshold 1 36 37 38 39
+mls qos srr-queue output dscp-map queue 2 threshold 2 24
+mls qos srr-queue output dscp-map queue 2 threshold 3 48 49 50 51 52 53 54 55
+mls qos srr-queue output dscp-map queue 2 threshold 3 56 57 58 59 60 61 62 63
+mls qos srr-queue output dscp-map queue 3 threshold 3 0 1 2 3 4 5 6 7
+mls qos srr-queue output dscp-map queue 4 threshold 1 8 9 11 13 15
+mls qos srr-queue output dscp-map queue 4 threshold 2 10 12 14
+mls qos queue-set output 1 threshold 1 100 100 50 200
+mls qos queue-set output 1 threshold 2 125 125 100 400
+mls qos queue-set output 1 threshold 3 100 100 100 400
+mls qos queue-set output 1 threshold 4 60 150 50 200
+mls qos queue-set output 1 buffers 15 25 40 20
+mls qos
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree portfast bpduguard default
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+errdisable recovery cause bpduguard
+errdisable recovery interval 400
+!
+vlan internal allocation policy ascending
+!
+vlan 204 
+!
+ip ssh time-out 60
+ip ssh version 2
+lldp run
+!
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/0/1
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/3
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/4
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/5
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/6
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/8
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/10
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/11
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/12
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/15
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/16
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/17
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/18
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/19
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/20
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/21
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/22
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/23
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/24
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/25
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/26
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/27
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/28
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/29
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/30
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/31
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/32
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/33
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/34
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/35
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/36
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/37
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/38
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/39
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/40
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/41
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/42
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/43
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/44
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/45
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/46
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/47
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/48
+ switchport access vlan 204
+ switchport mode access
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+!
+interface GigabitEthernet1/0/49
+!
+interface GigabitEthernet1/0/50
+!
+interface GigabitEthernet1/0/51
+ description This is a description...
+ switchport trunk allowed vlan 1,204
+ switchport mode trunk
+ srr-queue bandwidth share 1 30 35 5
+ priority-queue out 
+ mls qos trust dscp
+ auto qos trust dscp
+!
+interface GigabitEthernet1/0/52
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan204
+ ip address 172.20.204.11 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 172.20.204.1
+no ip http server
+no ip http secure-server
+!
+!
+snmp-server community super-secret-ro-community RO
+snmp-server queue-length 1
+snmp-server chassis-id switch-2
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps tty
+snmp-server enable traps cluster
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps entity
+snmp-server enable traps power-ethernet group 1
+snmp-server enable traps cpu threshold
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps syslog
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps flash insertion removal
+snmp-server enable traps port-security
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps mac-notification change move threshold
+snmp-server enable traps vlan-membership
+snmp-server host 172.20.2.70 super-secret-community 
+!
+!
+line con 0
+ exec-timeout 5 0
+ password super-secret-password
+ logging synchronous
+ login
+ transport output ssh
+line vty 0 4
+ exec-timeout 5 0
+ password super-secret-password
+ logging synchronous
+ login local
+ length 0
+ transport input ssh
+ transport output ssh
+line vty 5 15
+ no login
+ transport input ssh
+ transport output ssh
+!
+ntp server pool.ntp.org
+end
+
+
+

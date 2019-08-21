@@ -1,0 +1,292 @@
+no service tcp-small-servers
+no service udp-small-servers  
+no service pad
+no ip finger
+no service finger
+no ip http server
+no ip http secure-server
+!
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec localtime show-timezone                    
+service timestamps log datetime msec localtime show-timezone     
+service password-encryption
+service sequence-numbers  
+!
+hostname new-switch-4
+!
+boot-start-marker
+boot-end-marker
+!
+clock timezone EST -5 0
+clock summer-time EDT recurring
+!
+enable secret super-secret-password
+!
+username jkm privilege 15 secret super-secret-password
+!
+no aaa new-model
+!
+switch 1 provision ws-c2960x-48lps-l
+switch 2 provision ws-c2960x-48lps-l
+!
+!
+ip domain-name domain.fake
+no ip domain-lookup
+ip tcp synwait-time 5
+vtp domain vtp-domain
+vtp password vtp-password
+vtp version 2
+vtp mode transparent
+!
+spanning-tree mode mst
+spanning-tree extend system-id
+spanning-tree mst configuration
+ name MST
+ revision 1
+spanning-tree portfast default
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+Vlan 1
+Vlan 204
+ name vlan-204-name
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+!
+interface Gig1/0/1
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/2
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/3
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/4
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/5
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/6
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/7
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/8
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/9
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/10
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/11
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/12
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/13
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/14
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/15
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/16
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/17
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/18
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/19
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/20
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/21
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/22
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/23
+ switchport access vlan 204
+ switchport mode access
+interface Gig1/0/24
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/1
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/2
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/3
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/4
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/5
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/6
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/7
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/8
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/9
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/10
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/11
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/12
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/13
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/14
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/15
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/16
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/17
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/18
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/19
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/20
+ switchport access vlan 204
+ switchport mode access
+interface Gig2/0/21
+ switchport trunk allowed vlan 1,204,224
+ switchport mode trunk
+ duplex full
+interface Gig2/0/22
+ switchport trunk allowed vlan 1,204,224
+ switchport mode trunk
+interface Gig2/0/23
+ switchport trunk allowed vlan 1,204,2175
+ switchport mode trunk
+interface Gig2/0/24
+ switchport trunk allowed vlan 1,204,2175
+ switchport mode trunk
+interface Gig1/1/1
+ switchport trunk allowed vlan 1,204,224
+ switchport mode trunk
+interface Gig1/1/2
+ switchport trunk allowed vlan 1,204,224
+ switchport mode trunk
+interface Gig2/1/1
+ switchport trunk allowed vlan 204,2175
+ switchport mode trunk
+interface Gig2/1/2
+ switchport trunk allowed vlan 1,204,224
+ switchport mode trunk
+!
+interface Vlan1
+ ip address 172.20.250.162 255.255.255.0
+ no shut
+!
+ip default-gateway 172.20.250.1
+no ip http server
+no ip http secure-server
+!
+ip ssh version 2
+!
+logging buffered 256000 debugging
+logging console warning
+logging monitor critical
+logging trap warning
+logging source-interface vlan1
+logging 172.20.2.70
+!
+snmp-server community super-secret-ro-community RO
+snmp-server queue-length 1
+snmp-server chassis-id new-switch-4
+snmp-server enable traps
+snmp-server host 172.20.2.70 super-secret-community 
+!
+!
+archive 
+  path flash:BackupConfig
+  maximum 7
+  write-memory
+!
+!
+login block-for 120 attempts 5 within 60
+login on-failure log
+login on-success log
+aaa new-model
+ip radius source-interface vlan1
+radius server RADIUS-1
+ address ipv4 172.20.90.221 auth-port 1645 acct-port 1646
+ key 7 .........
+radius server RADIUS-2
+ address ipv4 172.20.90.222 auth-port 1645 acct-port 1646
+ key 7 .......
+aaa group server radius RADIUS-SERVERS
+ server name RADIUS-1
+ server name RADIUS-2
+aaa authentication login default group RADIUS-SERVERS local-case
+aaa authentication login console local-case
+aaa authorization exec aaa-auth group RADIUS-SERVERS local none 
+aaa session-id common
+!
+!
+!
+line con 0
+ privilege level 15
+ login authentication console
+ stopbits 1
+line aux 0
+ login authentication console
+ stopbits 1
+line vty 0 4
+ exec-timeout 30 0
+ privilege level 15
+ transport input ssh
+line vty 5 15
+ exec-timeout 30 0
+ privilege level 15
+ transport input ssh
+!
+ntp source Loopback0
+ntp server 172.20.3.2 prefer
+ntp server 172.20.3.3
+!
